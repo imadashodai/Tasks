@@ -26,20 +26,20 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Task> savedList = getSavedTaskArray(dataStore);
 
         // アダプターにセット
-        ListView listView = (ListView) findViewById(R.id.list_view);
+        ListView listView = findViewById(R.id.list_view);
         final ListAdapter listAdapter = new ListAdapter(MainActivity.this);
         listAdapter.setTaskList(savedList);
         listView.setAdapter(listAdapter);
 
         // テキストからチェックボックス作成
         // 追加ボタン
-        Button button = (Button) findViewById(R.id.button);
+        Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // エディットテキストのテキストを取得
                 // テキストエリア
-                editText = (EditText) findViewById(R.id.editText);
+                editText = findViewById(R.id.editText);
                 String text = editText.getText().toString();
                 editText.setText(""); // ボタンを押したらテキストエリアの中を空にする
 
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private Task createTask(String name) {
         Task task = new Task();
         task.setName(name);
+        task.setStatus(1);
         return task;
     }
 
@@ -74,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
             if (s.equals("")) {
                 continue;
             }
-            Task t = new Task();
-            t.setName(s);
+            Task t = createTask(s);
             savedList.add(t);
         }
         return savedList;

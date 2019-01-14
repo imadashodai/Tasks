@@ -1,6 +1,7 @@
 package com.grucchi.tasks;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.BaseAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,16 +49,25 @@ public class ListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.task_list, parent, false);
 
-        final CheckBox checkBox = ((CheckBox)convertView.findViewById(R.id.checkBox));
+        final CheckBox checkBox = (convertView.findViewById(R.id.checkBox));
         final Task targetTask = list.get(position);
         checkBox.setText(String.valueOf(targetTask.getName()));
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                checkBox.setTextColor(Color.LTGRAY);
-                // チェック後に削除
-                removeTask(getTaskList(), targetTask);
+
+                int status = targetTask.getStatus();
+
+                if (status == 1) {
+                    targetTask.setStatus(2);
+                    checkBox.setTextColor(Color.LTGRAY);
+                    list.remove(targetTask);
+                } else {
+                    targetTask.setStatus(1);
+                    checkBox.setTextColor(Color.BLACK);
+                    list.add(targetTask);
+                }
             }
         });
 
