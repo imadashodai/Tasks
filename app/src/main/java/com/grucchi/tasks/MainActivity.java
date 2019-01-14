@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.util.Log;
 import org.json.JSONArray;
 import java.util.*;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import android.widget.ListView;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Task> list;
     private SharedPreferences dataStore;
     private JSONArray jsonArr;
     private EditText editText;
